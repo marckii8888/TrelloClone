@@ -25,7 +25,6 @@ class App extends Component{
  }
 
  handleDelete = (id, e) => {
-   console.log(id);
   axios.delete(`http://127.0.0.1:8000/api/api/${id}/`);
  }
 
