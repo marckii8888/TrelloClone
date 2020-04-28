@@ -45,6 +45,10 @@ class App extends Component{
    }
  }
 
+ handleDelete = (e, id) =>{
+   console.log(id)
+ }
+
   render(){
   return (
     <div>
@@ -53,6 +57,7 @@ class App extends Component{
         {this.state.tasks.map(task =>(
           <li>
             {task.title} : {task.description}
+            <button>Del</button>
           </li>
         ))}
       </ul>
