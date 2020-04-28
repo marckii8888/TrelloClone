@@ -17,10 +17,11 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.urls import path, include, re_path                               
 from trelloapp import views                            
+from rest_framework import routers 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='index.html')),
-    re_path(r'^api/todolist', views.TodoList),
+    path('api/', include('trelloapp.urls'))
 ]

@@ -13,30 +13,38 @@ class App extends Component{
   }
 
   async componentDidMount(){
-    const response = await fetch('api/todolist/')
+    const response = await fetch('/api/')
     const json = await response.json()
     this.setState({tasks:json})
   }
 
- handleTaskChange(){
-    this.setState({task: e.target.value});
+ handleInputChange = e =>{
+    this.setState({[e.target.name]: e.target.value});
  }
 
- handleDescriptionChange(){
-  this.setState({description: e.target.value});
-}
+//  handleDescriptionChange = e => {
+//   this.setState({description: e.target.value});
+// }
 createTask = () => {
-  console.log(this.state.task);
-  console.log(this.state.description);
-  // fetch('api/todolist/', {method: 'POST', headers: {
-  //   'Accept': 'application/json',
-  //   'Content-Type': 'application/json',
-  // },body: JSON.stringify({
-  //   firstParam: 'yourValue',
-  //   secondParam: 'yourOtherValue',
-  // })
-  // })
+  const new_task = {
+    "title": this.state.task,
+    "description": this.state.description,
+    "completed": false
+  }
+  console.log(JSON.stringify(new_task))
+  fetch('/api/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(new_task)
+  }).then(()=>{
+    alert('Completed')
+  }).catch(function(error){
+    console.log(error)
+  })
 }
+
   render(){
   return (
     <div>
@@ -50,10 +58,10 @@ createTask = () => {
       </ul>
       <form>
         <label for="task">Task</label>
-        <input id="task_field"type="text" name="task" onChange={this.handleTaskChange}/>
+        <input type="text" name="task" onChange={this.handleInputChange}/>
         <label for="description">Description</label>
-        <input type="text" size="40" name="description" onChange={this.handleDescriptionChange}/>
-        <button onClick={this.createTask}>Add</button>
+        <input type="text" size="40" name="description" onChange={this.handleInputChange}/>
+        <button type="button" onClick={this.createTask}>Add</button>
       </form>
     </div>
   );
