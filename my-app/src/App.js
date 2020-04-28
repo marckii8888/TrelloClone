@@ -24,6 +24,11 @@ class App extends Component{
     this.setState({[e.target.name]: e.target.value});
  }
 
+ handleDelete = (id, e) => {
+   console.log(id);
+  axios.delete(`http://127.0.0.1:8000/api/api/${id}/`);
+ }
+
  handleFormSubmit = (e, requestType, id) => {
    //e.preventDefault()
    const title = this.state.task
@@ -57,7 +62,9 @@ class App extends Component{
         {this.state.tasks.map(task =>(
           <li>
             {task.title} : {task.description}
-            <button>Del</button>
+            <form onSubmit={(e) => this.handleDelete(task.id, e)}>
+              <button>delete</button>
+            </form>
           </li>
         ))}
       </ul>
