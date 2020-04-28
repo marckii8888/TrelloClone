@@ -129,6 +129,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'my-app/build/static'),
 ]
 
-# CORS_ORIGIN_WHITELIST = (
-#         'localhost:3000/'
-#     )
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+   'rest_framework.permissions.AllowAny',
+]
+}
+
+
+CORS_ORIGIN_ALLOW_ALL = True
