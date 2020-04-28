@@ -25,7 +25,7 @@ class App extends Component{
  }
 
  handleFormSubmit = (e, requestType, id) => {
-   e.preventDefault()
+   //e.preventDefault()
    const title = this.state.task
    const description = this.state.description
 
@@ -35,13 +35,13 @@ class App extends Component{
          title: title,
          description: description
        }).then(res => console.log(res))
-       .catch(err => console.log(err))
+       .catch(err => console.error(err))
      case 'put':
       return axios.put(`http://127.0.0.1:8000/api/api/${id}/`,{
         title: title,
         description: description
       }).then(res => console.log(res))
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
    }
  }
 

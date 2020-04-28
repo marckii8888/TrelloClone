@@ -5,9 +5,6 @@ from .models import Todo
 from django.views.decorators.csrf import ensure_csrf_cookie
 # Create your views here.
 
-
-
-
 # class TodoView(generics.ListCreateAPIView):       
 #     serializer_class = TodoSerializer          
 #     queryset = Todo.objects.all()   
