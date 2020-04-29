@@ -72,6 +72,7 @@ class TaskList extends Component {
           .post("http://127.0.0.1:8000/api/", {
             title: title,
             description: description,
+            completed: false,
           })
           .then((res) => console.log(res))
           .catch((err) => console.error(err));
