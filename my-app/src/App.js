@@ -1,9 +1,10 @@
 import React, { createContext, Component } from 'react';
 import DjangoCSRFToken from 'django-react-csrftoken';
 import axios from 'axios'
-import './App.css';
+// import './App.css';
 
 import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component{
   constructor(props){
@@ -54,6 +55,7 @@ class App extends Component{
 
   render(){
   return (
+    <Container>
     <div>
       <p>This is the trello clone</p>
       <ul>
@@ -61,7 +63,7 @@ class App extends Component{
           <li>
             {task.title} : {task.description}
             <form onSubmit={(e) => this.handleDelete(task.id, e)}>
-              <button>delete</button>
+              <Button variant="danger">delete</Button>
             </form>
           </li>
         ))}
@@ -76,9 +78,10 @@ class App extends Component{
         <input type="text" name="task" onChange={this.handleInputChange}/>
         <label for="description">Description</label>
         <input type="text" size="40" name="description" onChange={this.handleInputChange}/>
-        <button>Add</button>
+        <Button>Add</Button>
       </form>
     </div>
+    </Container>
   );
   }
 }
