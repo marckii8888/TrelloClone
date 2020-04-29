@@ -11,30 +11,41 @@ import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 
 function List(props) {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-  
-    return (
-      <>
-        <Button variant="secondary" onClick={handleShow} block>
-          {props.name}
-        </Button>
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>{props.name}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>{props.description}</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </>
-    );
-  }
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
+  const handleDelete = (id,e) => {
+    axios.delete(`http://127.0.0.1:8000/api/todos/${id}/`);
+    window.location.reload(false);
+  };
+
+  return (
+    <>
+      <Button variant="secondary" onClick={handleShow} block>
+        {props.name}
+      </Button>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>{props.name}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{props.description}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <form onClick={(e) => handleDelete(props.id,e)}>
+            <Button
+              variant="danger"
+            >
+              Delete
+            </Button>
+          </form>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+}
 
 class TaskList extends Component {
   constructor(props) {
@@ -47,7 +58,7 @@ class TaskList extends Component {
   }
 
   async componentDidMount() {
-    axios.get("http://127.0.0.1:8000/api/").then((res) => {
+    axios.get("http://127.0.0.1:8000/api/todos/").then((res) => {
       this.setState({ tasks: res.data });
     });
   }
@@ -57,8 +68,7 @@ class TaskList extends Component {
   };
 
   handleDelete = (id, e) => {
-    console.log("Hello");
-    axios.delete(`http://127.0.0.1:8000/api/${id}/`);
+    axios.delete(`http://127.0.0.1:8000/api/todos/${id}/`);
   };
 
   handleFormSubmit = (e, requestType, id) => {
@@ -69,7 +79,7 @@ class TaskList extends Component {
     switch (requestType) {
       case "post":
         return axios
-          .post("http://127.0.0.1:8000/api/", {
+          .post("http://127.0.0.1:8000/api/todos/", {
             title: title,
             description: description,
             completed: false,
@@ -78,7 +88,7 @@ class TaskList extends Component {
           .catch((err) => console.error(err));
       case "put":
         return axios
-          .put(`http://127.0.0.1:8000/api/${id}/`, {
+          .put(`http://127.0.0.1:8000/api/todos/${id}/`, {
             title: title,
             description: description,
           })
@@ -102,10 +112,11 @@ class TaskList extends Component {
         <ListGroup className="list-group-flush">
           {this.state.tasks.map((task) => (
             <ListGroupItem>
-              <List name={task.title} description={task.description} />
-              <form onSubmit={(e) => this.handleDelete(task.id, e)}>
-                <button>Del</button>
-              </form>
+              <List
+                name={task.title}
+                description={task.description}
+                id={task.id}
+              />
             </ListGroupItem>
           ))}
         </ListGroup>

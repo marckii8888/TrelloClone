@@ -1,13 +1,13 @@
 from rest_framework import serializers
-from .models import Todo
+from .models import Todo, TaskList
 
 
-# class TaskListSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = TaskList
-#         fields = ('id', 'title')
+class TaskListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TaskList
+        fields = ('id', 'title')
 
 class TodoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Todo
-        fields = ('id', 'title', 'description', 'completed')
+        fields = ('id', 'title', 'description', 'completed',)
