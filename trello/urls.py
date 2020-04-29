@@ -20,7 +20,7 @@ from trelloapp import views
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register(r'api', views.TodoViewSet, basename="todos")
+router.register(r'', views.TodoViewSet, basename="todos")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
