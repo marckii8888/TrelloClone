@@ -31,6 +31,7 @@ class App extends Component {
             <Col>
               {" "}
               <TaskList 
+              listid = {tasklist.id}
               header={tasklist.title}
               tasks = {tasklist.tasks}
                />
