@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import axios from "axios";
 import "./App.css";
 import TaskList from "./Components/TaskList";
 
@@ -12,7 +12,14 @@ import FormControl from "react-bootstrap/FormControl";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      tasklist: [],
+    };
+  }
+  async componentDidMount() {
+    axios.get("http://127.0.0.1:8000/api/cards/").then((res) => {
+      this.setState({ tasklist: res.data });
+    });
   }
 
   render() {
@@ -20,11 +27,16 @@ class App extends Component {
       <Container className="p-3">
         <p>This is the trello clone</p>
         <Row>
-          <Col>
-            {" "}
-            <TaskList />
-            {" "}
-          </Col>
+          {this.state.tasklist.map((tasklist) => (
+            <Col>
+              {" "}
+              <TaskList 
+              header={tasklist.title}
+              tasks = {tasklist.tasks}
+               />
+              {" "}
+            </Col>
+          ))}
           <Col>
             {" "}
             <InputGroup size="sm" className="mb-3">
