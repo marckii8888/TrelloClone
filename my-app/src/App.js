@@ -45,7 +45,12 @@ class App extends Component {
           {this.state.tasklist.map((tasklist) => (
             <Col>
               {" "}
-              <TaskList header={tasklist.title} tasks={tasklist.tasks} />{" "}
+              <TaskList 
+              listid = {tasklist.id}
+              header={tasklist.title}
+              tasks = {tasklist.tasks}
+               />
+              {" "}
             </Col>
           ))}
           <Col>

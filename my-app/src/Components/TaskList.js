@@ -71,7 +71,7 @@ class TaskList extends Component {
   };
 
   handleFormSubmit = (e, requestType, id) => {
-    //e.preventDefault()
+    // e.preventDefault()
     const title = this.state.task;
     const description = this.state.description;
 
@@ -86,10 +86,17 @@ class TaskList extends Component {
           .then((res) => console.log(res))
           .catch((err) => console.error(err));
       case "put":
+        const new_task = {
+          title: title,
+          description: description,
+          completed: false,
+        };
+        this.state.tasks.push(new_task);
         return axios
-          .put(`http://127.0.0.1:8000/api/todos/${id}/`, {
-            title: title,
-            description: description,
+          .put(`http://127.0.0.1:8000/api/cards/${this.props.listid}/`, {
+            id: this.props.listid,
+            title: this.props.header,
+            tasks: this.state.tasks
           })
           .then((res) => console.log(res))
           .catch((err) => console.error(err));
@@ -127,7 +134,7 @@ class TaskList extends Component {
           ))}
         </ListGroup>
         <Card.Body>
-          <form onSubmit={(event) => this.handleFormSubmit(event, "post", "")}>
+          <form onSubmit={(event) => this.handleFormSubmit(event, "put", "")}>
             <DjangoCSRFToken />
             <InputGroup size="sm" className="mb-3">
               <FormControl
