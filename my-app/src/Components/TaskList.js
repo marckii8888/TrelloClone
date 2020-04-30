@@ -70,6 +70,9 @@ class TaskList extends Component {
     axios.delete(`http://127.0.0.1:8000/api/todos/${id}/`);
   };
 
+  handleDeleteCard = (id, e) => {
+    axios.delete(`http://127.0.0.1:8000/api/cards/${id}/`);
+  };
   handleFormSubmit = (e, requestType, id) => {
     // e.preventDefault()
     const title = this.state.task;
@@ -96,7 +99,7 @@ class TaskList extends Component {
           .put(`http://127.0.0.1:8000/api/cards/${this.props.listid}/`, {
             id: this.props.listid,
             title: this.props.header,
-            tasks: this.state.tasks
+            tasks: this.state.tasks,
           })
           .then((res) => console.log(res))
           .catch((err) => console.error(err));
@@ -117,7 +120,11 @@ class TaskList extends Component {
             <Row>
               <Col>{this.props.header}</Col>
               <Col>
-              <Button variant="danger" size="sm" >Delete Card</Button>{' '}
+                <form onSubmit={() => this.handleDeleteCard(this.props.listid)}>
+                  <Button type="submit" variant="danger" size="sm">
+                    Delete Card
+                  </Button>{" "}
+                </form>
               </Col>
             </Row>
           </Card.Title>

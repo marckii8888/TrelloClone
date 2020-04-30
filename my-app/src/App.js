@@ -39,7 +39,7 @@ class App extends Component {
 
   render() {
     return (
-      <Container className="p-3">
+      <Container fluid>
         <p>This is the trello clone</p>
         <Row>
           {this.state.tasklist.map((tasklist) => (
@@ -57,9 +57,9 @@ class App extends Component {
             {" "}
             <Form onSubmit={this.handleAddCard}>
               <Form.Group as={Row} controlId="formPlaintextPassword">
-                <Col sm="10">
+                <Col sm="20">
                   <Form.Control
-                    placeholder="Password"
+                    placeholder="Add another list"
                     name="newCard"
                     onChange={this.handleInputChange}
                   />
