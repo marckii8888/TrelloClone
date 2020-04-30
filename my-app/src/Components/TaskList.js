@@ -9,13 +9,16 @@ import ListGroupItem from "react-bootstrap/ListGroupItem";
 import Modal from "react-bootstrap/Modal";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
+import Dropdown from "react-bootstrap/Dropdown";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 function List(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleDelete = (id,e) => {
+  const handleDelete = (id, e) => {
     axios.delete(`http://127.0.0.1:8000/api/todos/${id}/`);
     window.location.reload(false);
   };
@@ -34,12 +37,8 @@ function List(props) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <form onClick={(e) => handleDelete(props.id,e)}>
-            <Button
-              variant="danger"
-            >
-              Delete
-            </Button>
+          <form onClick={(e) => handleDelete(props.id, e)}>
+            <Button variant="danger">Delete</Button>
           </form>
         </Modal.Footer>
       </Modal>
@@ -107,7 +106,14 @@ class TaskList extends Component {
     return (
       <Card style={{ width: "18rem" }}>
         <Card.Body>
-          <Card.Title>{this.props.header}</Card.Title>
+          <Card.Title>
+            <Row>
+              <Col>{this.props.header}</Col>
+              <Col>
+              <Button variant="danger" size="sm" >Delete Card</Button>{' '}
+              </Col>
+            </Row>
+          </Card.Title>
         </Card.Body>
         <ListGroup className="list-group-flush">
           {this.props.tasks.map((task) => (

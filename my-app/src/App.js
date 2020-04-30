@@ -6,14 +6,15 @@ import TaskList from "./Components/TaskList";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import InputGroup from "react-bootstrap/InputGroup";
-import FormControl from "react-bootstrap/FormControl";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       tasklist: [],
+      newCard: "",
     };
   }
   async componentDidMount() {
@@ -21,6 +22,20 @@ class App extends Component {
       this.setState({ tasklist: res.data });
     });
   }
+  handleAddCard = (e) => {
+    console.log(this.state.newCard);
+    return axios
+      .post("http://127.0.0.1:8000/api/cards/", {
+        title: this.state.newCard,
+        tasks: [],
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.error(err));
+  };
+
+  handleInputChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   render() {
     return (
@@ -30,24 +45,27 @@ class App extends Component {
           {this.state.tasklist.map((tasklist) => (
             <Col>
               {" "}
-              <TaskList 
-              header={tasklist.title}
-              tasks = {tasklist.tasks}
-               />
-              {" "}
+              <TaskList header={tasklist.title} tasks={tasklist.tasks} />{" "}
             </Col>
           ))}
           <Col>
             {" "}
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm"
-                name="description"
-                placeholder="Enter task description"
-                onChange={this.handleInputChange}
-              />
-            </InputGroup>{" "}
+            <Form onSubmit={this.handleAddCard}>
+              <Form.Group as={Row} controlId="formPlaintextPassword">
+                <Col sm="10">
+                  <Form.Control
+                    placeholder="Password"
+                    name="newCard"
+                    onChange={this.handleInputChange}
+                  />
+                </Col>
+                <Col>
+                  <Button variant="light" type="submit">
+                    Add
+                  </Button>
+                </Col>
+              </Form.Group>
+            </Form>
           </Col>
         </Row>
       </Container>
