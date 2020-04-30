@@ -107,10 +107,10 @@ class TaskList extends Component {
     return (
       <Card style={{ width: "18rem" }}>
         <Card.Body>
-          <Card.Title>Trello Header Title</Card.Title>
+          <Card.Title>{this.props.header}</Card.Title>
         </Card.Body>
         <ListGroup className="list-group-flush">
-          {this.state.tasks.map((task) => (
+          {this.props.tasks.map((task) => (
             <ListGroupItem>
               <List
                 name={task.title}
