@@ -106,7 +106,7 @@ class TaskList extends Component {
     }
   };
 
-  handleClose = () => {
+  x = () => {
     React.useState(false);
   };
   handleShow = () => {
