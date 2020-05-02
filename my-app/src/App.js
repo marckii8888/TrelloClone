@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./App.css";
 import TaskList from "./Components/TaskList";
-import Drag from "./Components/Drag";
+
 
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+
 
 class App extends Component {
   constructor(props) {
@@ -38,6 +39,42 @@ class App extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  onDragOver = (event) => {
+    event.preventDefault();
+  };
+
+  onDrop = (event, cat, tasklist) => {
+    let taskid = event.dataTransfer.getData("taskid");
+    axios
+      .get(`http://127.0.0.1:8000/api/todos/${taskid}/`)
+      .then((res) => {
+        console.log(`This is what i got ${res.data.title}`);
+        console.log(
+          `Dropping task with id of ${taskid} to Card id ${tasklist.id}`
+        );
+        console.log(tasklist);
+        // Delete task from todos
+        axios.delete(`http://127.0.0.1:8000/api/todos/${taskid}/`);
+
+        // Add the task again to the respective card
+        const new_task = {
+          title: res.data.title,
+          description: res.data.description,
+          completed: false,
+        };
+        tasklist.tasks.push(new_task);
+        axios
+          .put(`http://127.0.0.1:8000/api/cards/${tasklist.id}/`, {
+            id: tasklist.id,
+            title: tasklist.title,
+            tasks: tasklist.tasks,
+          })
+          .then((res) => console.log(res))
+          .then(() => window.location.reload(false))
+          .catch((err) => console.error(err));
+      })
+  };
+
   render() {
     return (
       <Container fluid>
@@ -46,12 +83,16 @@ class App extends Component {
           {this.state.tasklist.map((tasklist) => (
             <Col>
               {" "}
-              <TaskList 
-              listid = {tasklist.id}
-              header={tasklist.title}
-              tasks = {tasklist.tasks}
-               />
-              {" "}
+              <div
+                onDragOver={(e) => this.onDragOver(e)}
+                onDrop={(e) => this.onDrop(e, "inProgress", tasklist)}
+              >
+                <TaskList
+                  listid={tasklist.id}
+                  header={tasklist.title}
+                  tasks={tasklist.tasks}
+                />
+              </div>{" "}
             </Col>
           ))}
           <Col>
@@ -74,7 +115,6 @@ class App extends Component {
             </Form>
           </Col>
         </Row>
-        <Drag />
       </Container>
     );
   }
