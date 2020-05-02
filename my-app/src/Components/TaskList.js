@@ -9,7 +9,6 @@ import ListGroupItem from "react-bootstrap/ListGroupItem";
 import Modal from "react-bootstrap/Modal";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
-import Dropdown from "react-bootstrap/Dropdown";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
@@ -23,9 +22,19 @@ function List(props) {
     window.location.reload(false);
   };
 
+  const onDragStart = (e, task) => {
+    console.log(`Dragging taskid: ${task.id}`)
+    e.dataTransfer.setData("taskid", task.id)
+  }
+
   return (
     <>
-      <Button variant="secondary" onClick={handleShow} block>
+      <Button
+        variant="secondary"
+        onClick={handleShow}
+        onDragStart = {(e) => onDragStart(e, props)}
+        draggable
+        block>
         {props.name}
       </Button>
       <Modal show={show} onHide={handleClose}>
@@ -66,9 +75,6 @@ class TaskList extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleDelete = (id, e) => {
-    axios.delete(`http://127.0.0.1:8000/api/todos/${id}/`);
-  };
 
   handleDeleteCard = (id, e) => {
     axios.delete(`http://127.0.0.1:8000/api/cards/${id}/`);
@@ -112,6 +118,12 @@ class TaskList extends Component {
   handleShow = () => {
     React.useState(true);
   };
+
+  onDragStart = (event, taskName) => {
+    console.log("dragstart on div: ", taskName);
+    event.dataTransfer.setData("taskName", taskName);
+  };
+
   render() {
     return (
       <Card style={{ width: "18rem" }}>
