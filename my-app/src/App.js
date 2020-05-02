@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./App.css";
 import TaskList from "./Components/TaskList";
+import Drag from "./Components/Drag";
 
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
@@ -73,6 +74,7 @@ class App extends Component {
             </Form>
           </Col>
         </Row>
+        <Drag />
       </Container>
     );
   }
