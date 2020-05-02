@@ -43,7 +43,7 @@ class App extends Component {
     event.preventDefault();
   };
 
-  onDrop = (event, cat, tasklist) => {
+  onDrop = (event, tasklist) => {
     let taskid = event.dataTransfer.getData("taskid");
     axios
       .get(`http://127.0.0.1:8000/api/todos/${taskid}/`)
@@ -85,7 +85,7 @@ class App extends Component {
               {" "}
               <div
                 onDragOver={(e) => this.onDragOver(e)}
-                onDrop={(e) => this.onDrop(e, "inProgress", tasklist)}
+                onDrop={(e) => this.onDrop(e, tasklist)}
               >
                 <TaskList
                   listid={tasklist.id}
