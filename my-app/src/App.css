@@ -1,14 +1,12 @@
 html{
-  background-color: rgb(200, 209, 217);
+  background-color: rgb(200, 209, 217)
 }
 
 .body {
   background-color: rgb(200, 209, 217);
+  height: 100vh !important;
 }
 
-.navbar navbar-expand navbar-light{
-  background-color: rgb(20, 101, 118) !important;
-}
 
 .color-nav {
   background-color: rgb(20, 101, 118) !important;
@@ -29,4 +27,16 @@ html{
 
 .container{
   margin-top: 1.5%;
+}
+
+.footer{
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+}
+
+.inner{
+  display: inline-block;
 }
