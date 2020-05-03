@@ -1,0 +1,32 @@
+html{
+  background-color: rgb(200, 209, 217);
+}
+
+.body {
+  background-color: rgb(200, 209, 217);
+}
+
+.navbar navbar-expand navbar-light{
+  background-color: rgb(20, 101, 118) !important;
+}
+
+.color-nav {
+  background-color: rgb(20, 101, 118) !important;
+}
+
+.navbar-brand{
+  color: whitesmoke !important;
+}
+
+.custom-grey-card{
+  background-color:  rgb(145, 162, 172) !important
+}
+
+.custom-grey-header{
+  background-color: rgb(122,140,154) !important;
+  color: whitesmoke;
+}
+
+.container{
+  margin-top: 1.5%;
+}

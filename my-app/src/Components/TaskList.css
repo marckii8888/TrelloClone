@@ -1,0 +1,22 @@
+.custom-card{
+    background-color:  rgb(18,138,152)
+}
+
+.custom-header{
+    background-color: rgb(15,81,95) !important;
+    color: whitesmoke;
+}
+
+.list-group-item{
+    background-color: rgb(18,138,152) !important;
+}
+
+.custom-btn{
+    background-color: rgb(155, 214, 220) !important ;
+    color:black !important; 
+}
+
+.custom-add-btn{
+    float:right;
+    background-color: rgb(172, 186, 195) !important;
+}
