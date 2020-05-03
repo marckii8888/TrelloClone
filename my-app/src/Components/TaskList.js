@@ -16,32 +16,37 @@ function List(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  const state = {
+    value : props.description,
+  }
   const handleDelete = (id, e) => {
     axios.delete(`http://127.0.0.1:8000/api/todos/${id}/`);
     window.location.reload(false);
   };
 
   const onDragStart = (e, task) => {
-    console.log(`Dragging taskid: ${task.id}`)
-    e.dataTransfer.setData("taskid", task.id)
-  }
+    console.log(`Dragging taskid: ${task.id}`);
+    e.dataTransfer.setData("taskid", task.id);
+  };
 
   return (
     <>
       <Button
         variant="secondary"
         onClick={handleShow}
-        onDragStart = {(e) => onDragStart(e, props)}
+        onDragStart={(e) => onDragStart(e, props)}
         draggable
-        block>
+        block
+      >
         {props.name}
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{props.name}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{props.description}</Modal.Body>
+        <Modal.Body>
+            {props.description}
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
@@ -74,7 +79,6 @@ class TaskList extends Component {
   handleInputChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
-
 
   handleDeleteCard = (id, e) => {
     axios.delete(`http://127.0.0.1:8000/api/cards/${id}/`);
