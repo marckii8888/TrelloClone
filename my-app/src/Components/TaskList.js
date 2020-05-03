@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
 import DjangoCSRFToken from "django-react-csrftoken";
 import axios from "axios";
+import "./TaskList.css";
 
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -17,8 +18,8 @@ function List(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const state = {
-    value : props.description,
-  }
+    value: props.description,
+  };
   const handleDelete = (id, e) => {
     axios.delete(`http://127.0.0.1:8000/api/todos/${id}/`);
     window.location.reload(false);
@@ -30,13 +31,14 @@ function List(props) {
   };
 
   return (
-    <>
+    <div className="custom-card">
       <Button
         variant="secondary"
         onClick={handleShow}
         onDragStart={(e) => onDragStart(e, props)}
         draggable
         block
+        className="custom-btn"
       >
         {props.name}
       </Button>
@@ -44,9 +46,7 @@ function List(props) {
         <Modal.Header closeButton>
           <Modal.Title>{props.name}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-            {props.description}
-        </Modal.Body>
+        <Modal.Body>{props.description}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
@@ -56,7 +56,7 @@ function List(props) {
           </form>
         </Modal.Footer>
       </Modal>
-    </>
+    </div>
   );
 }
 
@@ -131,20 +131,18 @@ class TaskList extends Component {
   render() {
     return (
       <Card style={{ width: "18rem" }}>
-        <Card.Body>
-          <Card.Title>
-            <Row>
-              <Col>{this.props.header}</Col>
-              <Col>
-                <form onSubmit={() => this.handleDeleteCard(this.props.listid)}>
-                  <Button type="submit" variant="danger" size="sm">
-                    Delete Card
-                  </Button>{" "}
-                </form>
-              </Col>
-            </Row>
-          </Card.Title>
-        </Card.Body>
+        <Card.Header as="h5" className="custom-header">
+          <Row>
+            <Col>{this.props.header}</Col>
+            <Col>
+              <form onSubmit={() => this.handleDeleteCard(this.props.listid)}>
+                <Button type="submit" variant="danger" size="sm">
+                  Delete Card
+                </Button>{" "}
+              </form>
+            </Col>
+          </Row>
+        </Card.Header>
         <ListGroup className="list-group-flush">
           {this.props.tasks.map((task) => (
             <ListGroupItem>
@@ -156,7 +154,7 @@ class TaskList extends Component {
             </ListGroupItem>
           ))}
         </ListGroup>
-        <Card.Body>
+        <Card.Body className="custom-card">
           <form onSubmit={(event) => this.handleFormSubmit(event, "put", "")}>
             <DjangoCSRFToken />
             <InputGroup size="sm" className="mb-3">
@@ -179,8 +177,8 @@ class TaskList extends Component {
               />
             </InputGroup>
 
-            <Button variant="light" type="submit">
-              Add
+            <Button variant="light" type="submit" className="custom-add-btn">
+              +
             </Button>
           </form>
         </Card.Body>

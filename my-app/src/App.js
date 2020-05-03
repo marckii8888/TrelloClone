@@ -9,6 +9,7 @@ import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Navbar from "react-bootstrap/Navbar";
+import Card from "react-bootstrap/Card";
 
 class App extends Component {
   constructor(props) {
@@ -74,11 +75,11 @@ class App extends Component {
 
   render() {
     return (
-      <>
-        <Navbar bg="light">
+      <div className="body">
+        <Navbar className="color-nav" variant="light">
           <Navbar.Brand>This is the trello clone</Navbar.Brand>
         </Navbar>
-        <Container>
+        <Container fluid className="container">
           <Row>
             {this.state.tasklist.map((tasklist) => (
               <Col>
@@ -96,27 +97,33 @@ class App extends Component {
               </Col>
             ))}
             <Col>
-              {" "}
-              <Form onSubmit={this.handleAddCard}>
-                <Form.Group as={Row} controlId="formPlaintextPassword">
-                  <Col sm="20">
-                    <Form.Control
-                      placeholder="Add another list"
-                      name="newCard"
-                      onChange={this.handleInputChange}
-                    />
-                  </Col>
-                  <Col>
-                    <Button variant="light" type="submit">
-                      Add
-                    </Button>
-                  </Col>
-                </Form.Group>
-              </Form>
+              <Card style={{ width: "18rem" }} className="custom-grey-card">
+                <Card.Header as="h5" className="custom-grey-header" >Add New List</Card.Header>
+                <Card.Body>
+                  <Card.Title>
+                    <Form onSubmit={this.handleAddCard}>
+                      <Form.Group as={Row} controlId="formPlaintextPassword">
+                        <Col sm="20">
+                          <Form.Control
+                            placeholder="New List Name"
+                            name="newCard"
+                            onChange={this.handleInputChange}
+                          />
+                        </Col>
+                        <Col>
+                          <Button variant="light" type="submit">
+                            +
+                          </Button>
+                        </Col>
+                      </Form.Group>
+                    </Form>
+                  </Card.Title>
+                </Card.Body>
+              </Card>{" "}
             </Col>
           </Row>
         </Container>
-      </>
+      </div>
     );
   }
 }
