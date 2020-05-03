@@ -77,7 +77,7 @@ class App extends Component {
     return (
       <div className="body">
         <Navbar className="color-nav" variant="light">
-          <Navbar.Brand>This is the trello clone</Navbar.Brand>
+          <Navbar.Brand>Trello Clone</Navbar.Brand>
         </Navbar>
         <Container fluid className="container">
           <Row>
@@ -98,7 +98,9 @@ class App extends Component {
             ))}
             <Col>
               <Card style={{ width: "18rem" }} className="custom-grey-card">
-                <Card.Header as="h5" className="custom-grey-header" >Add New List</Card.Header>
+                <Card.Header as="h5" className="custom-grey-header">
+                  Add New List
+                </Card.Header>
                 <Card.Body>
                   <Card.Title>
                     <Form onSubmit={this.handleAddCard}>
@@ -123,6 +125,21 @@ class App extends Component {
             </Col>
           </Row>
         </Container>
+        <footer className="footer">
+          <div className="inner">
+            <p>
+              Trello Clone, by{" "}
+              <a href="https://github.com/marckii8888" target="blank">
+                Marcus
+              </a>{" "}
+              and{" "}
+              <a href="https://github.com/jdubs9" target="blank">
+                Jing Wen
+              </a>
+              .
+            </p>
+          </div>
+        </footer>
       </div>
     );
   }
