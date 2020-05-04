@@ -1,5 +1,9 @@
+* {
+    border: none !important;
+}
+
 .custom-card{
-    background-color:  rgb(18,138,152)
+    background-color:  rgb(18,138,152);
 }
 
 .custom-header{
@@ -13,7 +17,7 @@
 
 .custom-btn{
     background-color: rgb(155, 214, 220) !important ;
-    color:black !important; 
+    color:black !important;
 }
 
 .custom-add-btn{
