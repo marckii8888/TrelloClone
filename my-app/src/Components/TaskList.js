@@ -18,9 +18,9 @@ function List(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => {setShow(false); window.location.reload(false);};
   const handleShow = () => setShow(true);
-  const state = {
-    value: props.description,
-  };
+  // const state = {
+  //   value: props.description,
+  // };
   const handleDelete = (id, e) => {
     axios.delete(`http://127.0.0.1:8000/api/todos/${id}/`);
     window.location.reload(false);
