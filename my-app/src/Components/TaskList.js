@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
 import DjangoCSRFToken from "django-react-csrftoken";
 import axios from "axios";
+import ContentEditable from 'react-contenteditable';
 import "./TaskList.css";
 
 import Button from "react-bootstrap/Button";
@@ -15,14 +16,26 @@ import Row from "react-bootstrap/Row";
 
 function List(props) {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {setShow(false); window.location.reload(false);};
   const handleShow = () => setShow(true);
-  const state = {
-    value: props.description,
-  };
+  // const state = {
+  //   value: props.description,
+  // };
   const handleDelete = (id, e) => {
     axios.delete(`http://127.0.0.1:8000/api/todos/${id}/`);
     window.location.reload(false);
+  };
+
+  const handleChange = (e) => {
+    return axios
+      .put(`http://127.0.0.1:8000/api/todos/${props.id}/`, {
+        id: props.id,
+        title: props.name,
+        description: e.target.value,
+      })
+      .then((res) => console.log(res))
+      // .then(() => window.location.reload(false))
+      .catch((err) => console.error(err));
   };
 
   const onDragStart = (e, task) => {
@@ -46,7 +59,14 @@ function List(props) {
         <Modal.Header closeButton>
           <Modal.Title>{props.name}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{props.description}</Modal.Body>
+        <Modal.Body>
+          {/* {props.description} */}
+          <ContentEditable
+            html={props.description}
+            onChange={handleChange}
+            // onBlur={handleChange}
+            />
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
