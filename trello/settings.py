@@ -25,7 +25,7 @@ SECRET_KEY = 'jxi%iw$c@=a8rl@ea@ct%+0)@ijvi5m7095=w+)35x(!fvh_l+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://trellocopyapp.herokuapp.com/', '127.0.0.1:8000']
+ALLOWED_HOSTS = ['https://trellocopyapp.herokuapp.com/', '127.0.0.1']
 
 
 # Application definition
@@ -73,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'trello.wsgi.application'
+#WSGI_APPLICATION = 'trello.wsgi.application'
 
 
 # Database
