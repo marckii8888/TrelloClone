@@ -1,8 +1,8 @@
 # TrelloClone
 
 ## Overview
-This project aims to replicate the to do list web application, Trello.
-The project is done using python for the back end and react for the front end.
+This project is a replication of the To-Do list web application, Trello.
+The project is done using Python for the back end and React.js for the front end.
 
 ## Objective
 1. Familiarize myself with front end and back end integration.
@@ -10,9 +10,10 @@ The project is done using python for the back end and react for the front end.
 3. Practice React.js.
 
 ## Learning points
-1. Setting up a Django REST framework and its methods.
-2. Calling and utilizing the created API in React.js.
+1. Using and setting up a Django REST framework for the back-end
+2. Usage of API calls as well as BootStrap for the front-end
 3. Using dataTransfer to transfer data within React.js
+4. Utilizing Django-cors-headers and white noise to link both back-end and front-end
 
 ## Web App Demo and Features
 ### 1. Web App is able to create a new card.
