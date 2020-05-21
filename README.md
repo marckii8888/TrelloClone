@@ -4,8 +4,8 @@
 This project is a replication of the To-Do list web application, Trello.
 The project is done using Python for the back end and React.js for the front end.
 
-## Objective
-1. Familiarize myself with front end and back end integration.
+## Objectives
+1. Familiarize ourselves with front end and back end integration.
 2. Practice python Django REST framework.
 3. Practice React.js.
 
@@ -25,7 +25,7 @@ The project is done using Python for the back end and React.js for the front end
 ### Web App allows users to edit the description of a task.
 ![grab-landing-page](https://github.com/marckii8888/TrelloClone/blob/master/gifsformd/gif3.gif)
 
-### Web App allows users to delete a task and card
+### Web App allows users to delete tasks and cards
 ![grab-landing-page](https://github.com/marckii8888/TrelloClone/blob/master/gifsformd/gif4.gif)
 
 ## Running the app
