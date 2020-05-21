@@ -16,16 +16,16 @@ The project is done using Python for the back end and React.js for the front end
 4. Utilizing Django-cors-headers and white noise to link both back-end and front-end
 
 ## Web App Demo and Features
-### 1. Web App is able to create a new card.
+### 1. The Web App is able to create a new card.
 ![grab-landing-page](https://github.com/marckii8888/TrelloClone/blob/master/gifsformd/gif1.gif)
 
-### 2. Web App allows user to move tasks from one card to another.
+### 2. The Web App allows users to move tasks from one card to another.
 ![grab-landing-page](https://github.com/marckii8888/TrelloClone/blob/master/gifsformd/gif2.gif)
 
-### Web App allows users to edit the description of a task.
+### 3. The Web App allows users to edit the description of a task.
 ![grab-landing-page](https://github.com/marckii8888/TrelloClone/blob/master/gifsformd/gif3.gif)
 
-### Web App allows users to delete tasks and cards
+### 4. The Web App allows users to delete tasks and cards
 ![grab-landing-page](https://github.com/marckii8888/TrelloClone/blob/master/gifsformd/gif4.gif)
 
 ## Running the app
